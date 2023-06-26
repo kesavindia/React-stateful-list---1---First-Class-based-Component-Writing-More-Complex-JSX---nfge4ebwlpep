@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import '../styles/App.css';
 
@@ -27,10 +27,20 @@ const data = {
   ]
 }
 const App = () => {
-
+  const [yr,setYr] = React.useState();  
   return (
     <div id="main">
-      
+      <select onChange={(e)=>setYr(e.target.value)}>
+        <option value={null}></option>
+        {Object.keys(data).map((el,ind)=>(<option key={el} value={el}>{el}</option>
+        ))}        
+      </select>
+      <div id="selected-year">{yr?`Selected year-${yr}`:'No year selected'}
+      <ul>
+        {yr && data[yr].map((e,i)=>(<li key={i}>{e}</li>
+        ))}
+      </ul>
+      </div>
     </div>
   )
 }
